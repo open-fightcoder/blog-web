@@ -1,8 +1,8 @@
 package common
 
 import (
-	"github.com/shiyicode/gin-framework/common/g"
-	"github.com/shiyicode/gin-framework/common/store"
+	"github.com/blog-web/common/g"
+	"github.com/blog-web/common/store"
 )
 
 func Init(cfgFile string) {

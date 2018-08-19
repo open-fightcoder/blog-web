@@ -6,8 +6,8 @@ import (
 	"io"
 
 	"github.com/pkg/errors"
-	"github.com/shiyicode/gin-framework/common/components"
-	"github.com/shiyicode/gin-framework/models"
+	"github.com/blog-web/common/components"
+	"github.com/blog-web/models"
 )
 
 func AccountLogin(email string, password string) (string, error) {

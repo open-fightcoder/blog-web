@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/shiyicode/gin-framework/router/controllers/base"
+	"github.com/blog-web/router/controllers/base"
 	"github.com/stretchr/testify/assert"
 )
 

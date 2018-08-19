@@ -1,7 +1,7 @@
 package models
 
 import (
-	. "github.com/shiyicode/gin-framework/common/store"
+	. "github.com/blog-web/common/store"
 )
 
 type Account struct {

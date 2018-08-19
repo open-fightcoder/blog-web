@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/shiyicode/gin-framework/router/controllers/base"
+	"github.com/blog-web/router/controllers/base"
 )
 
 func RegisterAccount(router *gin.RouterGroup) {
