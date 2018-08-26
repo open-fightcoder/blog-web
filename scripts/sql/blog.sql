@@ -51,9 +51,9 @@ CREATE TABLE `article` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '-1 删除 0 草稿 1 正常 2 置顶',
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `article_type_id` int(11) NOT NULL DEFAULT '0' COMMENT '文章类型 articleTypeId',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '文章类型 articleTypeId',
   `look` int(11) NOT NULL DEFAULT '0' COMMENT '浏览量',
-  `like` int(11) NOT NULL DEFAULT '0' COMMENT '喜欢',
+  `favour` int(11) NOT NULL DEFAULT '0' COMMENT '喜欢',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -98,13 +98,13 @@ CREATE TABLE `comment` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `like`
+-- Table structure for table `favour`
 --
 
-DROP TABLE IF EXISTS `like`;
+DROP TABLE IF EXISTS `favour`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `like` (
+CREATE TABLE `favour` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` bigint(20) NOT NULL COMMENT '点赞用户Id',
   `article_id` bigint(20) NOT NULL COMMENT '文章Id',
@@ -171,4 +171,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-26 21:46:08
+-- Dump completed on 2018-08-26 22:06:33
