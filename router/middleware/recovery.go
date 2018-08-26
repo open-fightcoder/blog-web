@@ -7,6 +7,10 @@ import (
 	"net/http/httputil"
 	"runtime"
 
+	"net/http"
+
+	"github.com/blog-web/common/g"
+	"github.com/blog-web/router/controllers/base"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )
@@ -24,10 +28,15 @@ func Recovery() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				stack := stack(3)
-				httprequest, _ := httputil.DumpRequest(c.Request, false)
-				log.Errorf("[Recovery] panic recovered:\n%s\n%s\n%s%s", string(httprequest), err, string(stack), reset)
-				c.AbortWithStatus(500)
+				if errStruct, ok := err.(g.Error); ok {
+					stack := stack(3)
+					httprequest, _ := httputil.DumpRequest(c.Request, false)
+					log.Errorf("[Recovery] panic recovered:\n%s\nHttpCode: %d\nErrCode: %d\nErrMsg: %s\n%s%s", string(httprequest), errStruct.HttpCode, errStruct.Code, errStruct.Msg, string(stack), reset)
+					c.JSON(errStruct.HttpCode, base.Fail(errStruct.Code, errStruct.Msg))
+				} else {
+					c.JSON(http.StatusInternalServerError, "服务器内部错误")
+				}
+				c.Abort()
 			}
 		}()
 		c.Next()

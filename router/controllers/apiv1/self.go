@@ -3,8 +3,9 @@ package apiv1
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/blog-web/common/g"
+	"github.com/blog-web/managers"
+	"github.com/gin-gonic/gin"
 )
 
 func RegisterSelf(router *gin.RouterGroup) {
@@ -14,6 +15,7 @@ func RegisterSelf(router *gin.RouterGroup) {
 }
 
 func httpHandlerHealth(c *gin.Context) {
+	managers.AccountLogin()
 	c.String(http.StatusOK, "ok")
 }
 
