@@ -4,9 +4,8 @@ import (
 	"encoding/base64"
 	"net/http"
 
+	"github.com/blog-web/common/components"
 	"github.com/gin-gonic/gin"
-	"github.com/shiyicode/gin-framework/common/components"
-	"github.com/shiyicode/gin-framework/router/controllers/base"
 )
 
 func Auth() gin.HandlerFunc {
@@ -26,6 +25,7 @@ func Auth() gin.HandlerFunc {
 				return
 			}
 		}
-		c.AbortWithStatusJSON(http.StatusForbidden, base.Fail("auth failure."))
+		//c.AbortWithStatusJSON(http.StatusForbidden, base.Fail("auth failure."))
+		c.AbortWithStatusJSON(http.StatusForbidden, "")
 	}
 }

@@ -3,11 +3,10 @@ package router
 import (
 	"sync"
 
+	"github.com/blog-web/common/g"
+	"github.com/blog-web/router/controllers/apiv1"
+	"github.com/blog-web/router/middleware"
 	"github.com/gin-gonic/gin"
-	"github.com/shiyicode/gin-framework/common/g"
-	"github.com/shiyicode/gin-framework/router/controllers/apiv1"
-	"github.com/shiyicode/gin-framework/router/controllers/authv1"
-	"github.com/shiyicode/gin-framework/router/middleware"
 )
 
 var router *gin.Engine
@@ -31,9 +30,6 @@ func initRouter() {
 	router.Use(middleware.Cors())
 	router.Use(middleware.Recovery())
 	router.Use(middleware.MaxAllowed(g.Conf().Run.MaxAllowed))
-
-	authRouter := router.Group("/authv1", middleware.Auth())
-	authv1.Register(authRouter)
 
 	apiRouter := router.Group("/apiv1")
 	apiv1.Register(apiRouter)
