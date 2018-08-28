@@ -8,12 +8,15 @@ import (
 	error "github.com/blog-web/common/g"
 	"github.com/blog-web/managers"
 	"github.com/blog-web/models"
+	"github.com/blog-web/router/controllers/base"
 	"github.com/gin-gonic/gin"
 )
 
 func RegisterUser(router *gin.RouterGroup) {
-	router.POST("login", httpHandlerLogin)
-	router.POST("register", httpHandlerRegister)
+	router.POST("user/login", httpHandlerLogin)
+	router.POST("user/register", httpHandlerRegister)
+	router.POST("user/changepasswd", httpHandlerChangePasswd)
+	router.POST("user/changemess", httpHandlerChangeMess)
 }
 
 func httpHandlerLogin(c *gin.Context) {
@@ -51,4 +54,28 @@ func httpHandlerRegister(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]int64{
 		"user_id": userId,
 	})
+}
+
+func httpHandlerChangePasswd(c *gin.Context) {
+	passwd := c.PostForm("passwd")
+	userId := base.UserId(c)
+	if userId == 0 {
+		panic(error.PrivError("您尚未登录!"))
+	}
+	managers.UserChangePassWd(userId, passwd)
+	c.JSON(http.StatusOK, "")
+}
+
+func httpHandlerChangeMess(c *gin.Context) {
+	userId := base.UserId(c)
+	if userId == 0 {
+		panic(error.PrivError("您尚未登录!"))
+	}
+	param := models.User{}
+	err := c.Bind(&param)
+	if err != nil {
+		panic(error.ParamError("参数格式错误,解析失败!"))
+	}
+	managers.UserChangeMess(userId, param.NickName, param.Sex, param.Blog, param.Git, param.Description, param.Birthday, param.DailyAddress, param.StatSchool, param.SchoolName)
+	c.JSON(http.StatusOK, "")
 }

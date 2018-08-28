@@ -6,6 +6,38 @@ import (
 	"github.com/blog-web/models"
 )
 
+func UserChangeMess(userId int64, NickName string, Sex string, Blog string, Git string, Description string, Birthday string, DailyAddress string, StatSchool string, SchoolName string) {
+	userMess, err := models.UserGetById(userId)
+	if err != nil {
+		panic(error.DBError())
+	}
+	userMess.NickName = NickName
+	userMess.Sex = Sex
+	userMess.Blog = Blog
+	userMess.Git = Git
+	userMess.Description = Description
+	userMess.Birthday = Birthday
+	userMess.DailyAddress = DailyAddress
+	userMess.StatSchool = StatSchool
+	userMess.SchoolName = SchoolName
+	err = models.UserUpdate(userMess)
+	if err != nil {
+		panic(error.DBError("修改个人信息失败!"))
+	}
+}
+
+func UserChangePassWd(userId int64, password string) {
+	account, err := models.GetAccountByUserId(userId)
+	if err != nil {
+		panic(error.DBError())
+	}
+	account.Password = components.MD5Encode(password)
+	err = models.AccountUpdate(account)
+	if err != nil {
+		panic(error.DBError("修改密码失败!"))
+	}
+}
+
 func UserLogin(email string, password string) (string, int64) {
 	account, err := models.UserGetByEmail(email)
 	if err != nil {
