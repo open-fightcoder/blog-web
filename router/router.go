@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	"github.com/blog-web/common/g"
-	"github.com/blog-web/router/controllers/apiv1"
+	"github.com/blog-web/router/controllers"
 	"github.com/blog-web/router/middleware"
 	"github.com/gin-gonic/gin"
 )
@@ -28,9 +28,10 @@ func initRouter() {
 
 	router.Use(middleware.Logger())
 	router.Use(middleware.Cors())
+	router.Use(middleware.Auth())
 	router.Use(middleware.Recovery())
 	router.Use(middleware.MaxAllowed(g.Conf().Run.MaxAllowed))
 
-	apiRouter := router.Group("/apiv1")
-	apiv1.Register(apiRouter)
+	apiRouter := router.Group("/")
+	controllers.Register(apiRouter)
 }

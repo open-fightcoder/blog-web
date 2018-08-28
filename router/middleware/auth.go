@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"encoding/base64"
-	"net/http"
 
 	"github.com/blog-web/common/components"
 	"github.com/gin-gonic/gin"
@@ -18,14 +17,13 @@ func Auth() gin.HandlerFunc {
 
 		token = string(data)
 
+		idStr := ""
 		if token != "" {
 			if flag, userId := components.RequireTokenAuthentication(token); flag == true {
-				c.Set("userId", userId)
-				c.Next()
-				return
+				idStr = userId
 			}
 		}
-		//c.AbortWithStatusJSON(http.StatusForbidden, base.Fail("auth failure."))
-		c.AbortWithStatusJSON(http.StatusForbidden, "")
+		c.Set("userId", idStr)
+		c.Next()
 	}
 }

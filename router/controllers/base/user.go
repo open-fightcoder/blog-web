@@ -1,13 +1,14 @@
 package base
 
 import (
-	"github.com/gin-gonic/gin"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 func UserId(c *gin.Context) int64 {
-	str, exists := c.Get("userId")
-	if exists == false {
+	str, _ := c.Get("userId")
+	if str == "" {
 		return 0
 	}
 	id, _ := strconv.ParseInt(str.(string), 10, 64)

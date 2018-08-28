@@ -41,6 +41,12 @@ func NotFoundError(msg ...string) Error {
 	return _build(http.StatusNotFound, 10005, "Not Found", msg...)
 }
 
+//密码不符合要求，昵称不允许为空...
 func RequestError(msg ...string) Error {
 	return _build(http.StatusBadRequest, 10006, "Bad Request", msg...)
+}
+
+//建立新用户时，该用户名/手机号已经存在...
+func ConflictError(msg ...string) Error {
+	return _build(http.StatusConflict, 10007, "Conflict", msg...)
 }
