@@ -17,6 +17,50 @@ func RegisterUser(router *gin.RouterGroup) {
 	router.POST("user/register", httpHandlerRegister)
 	router.POST("user/changepasswd", httpHandlerChangePasswd)
 	router.POST("user/changemess", httpHandlerChangeMess)
+
+	//TODO 测试
+	router.POST("user/follow", httpHandlerFollow)
+	router.POST("user/unfollow", httpHandlerUnfollow)
+	router.POST("user/listidol", httpHandlerListidol)
+	router.POST("user/listfans", httpHandlerListfans)
+}
+
+func httpHandlerListidol(c *gin.Context) {
+	userId := base.UserId(c)
+	if userId == 0 {
+		panic(error.PrivError("您尚未登录!"))
+	}
+	userList := managers.UserListidol(userId)
+	c.JSON(http.StatusOK, userList)
+}
+
+func httpHandlerListfans(c *gin.Context) {
+	userId := base.UserId(c)
+	if userId == 0 {
+		panic(error.PrivError("您尚未登录!"))
+	}
+	userList := managers.UserListfans(userId)
+	c.JSON(http.StatusOK, userList)
+}
+
+func httpHandlerFollow(c *gin.Context) {
+	articleId := c.Query("user_id")
+	userId := base.UserId(c)
+	if userId == 0 {
+		panic(error.PrivError("您尚未登录!"))
+	}
+	managers.UserFollow(userId, articleId)
+	c.JSON(http.StatusOK, "")
+}
+
+func httpHandlerUnfollow(c *gin.Context) {
+	articleId := c.Query("user_id")
+	userId := base.UserId(c)
+	if userId == 0 {
+		panic(error.PrivError("您尚未登录!"))
+	}
+	managers.UserUnfollow(userId, articleId)
+	c.JSON(http.StatusOK, "")
 }
 
 func httpHandlerLogin(c *gin.Context) {
