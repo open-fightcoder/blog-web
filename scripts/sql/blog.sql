@@ -46,6 +46,7 @@ DROP TABLE IF EXISTS `article`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `article` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `user_id` bigint(20) NOT NULL COMMENT 'userId',
   `title` char(100) NOT NULL DEFAULT '' COMMENT '标题',
   `content` text COMMENT '文章内容',
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '-1 删除 0 草稿 1 正常 2 置顶',
@@ -54,7 +55,8 @@ CREATE TABLE `article` (
   `type` int(11) NOT NULL DEFAULT '0' COMMENT '文章类型 articleTypeId',
   `look` int(11) NOT NULL DEFAULT '0' COMMENT '浏览量',
   `favour` int(11) NOT NULL DEFAULT '0' COMMENT '喜欢',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
