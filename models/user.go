@@ -27,8 +27,11 @@ func UserGetById(id int64) (*User, error) {
 	user := new(User)
 	has, err := OrmWeb.Id(id).Get(user)
 
-	if err != nil || !has {
-		return nil, errors.New("DB Error")
+	if err != nil {
+		return nil, err
+	}
+	if !has {
+		return nil, nil
 	}
 	return user, nil
 }
