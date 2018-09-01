@@ -88,3 +88,37 @@ func CommentDelete(userId int64, commentIdStr string) {
 		panic(error.DBError("删除失败!"))
 	}
 }
+
+func CommentList(blogIdStr string) []map[string]interface{} {
+	blogId, err := strconv.ParseInt(blogIdStr, 10, 64)
+	if err != nil {
+		panic(error.ParamError("参数必须为数字!"))
+	}
+	commentList := make([]*models.Comment, 0)
+	err = OrmWeb.Where("article_id=?", blogId).Find(&commentList)
+	if err != nil {
+		panic(error.DBError())
+	}
+
+	resMess := make([]*models.Comment, 0)
+	for _, comment := range commentList {
+		if comment.ReplyId == 0 {
+			resMess = append(resMess, comment)
+		}
+	}
+	commentMess := make([]map[string]interface{}, 0)
+	for _, mainComment := range resMess {
+		replyList := make([]*models.Comment, 0)
+		for _, replyComment := range commentList {
+			if replyComment.ReplyId == mainComment.Id {
+				replyList = append(replyList, replyComment)
+			}
+		}
+		result := map[string]interface{}{
+			"main":  mainComment,
+			"reply": replyList,
+		}
+		commentMess = append(commentMess, result)
+	}
+	return commentMess
+}
