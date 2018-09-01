@@ -91,7 +91,7 @@ CREATE TABLE `comment` (
   `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '评论人账户ID',
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `replyid` bigint(20) DEFAULT '0' COMMENT '0 未被回复 >0 回复的commentId',
+  `reply_id` bigint(20) DEFAULT '0' COMMENT '0 未被回复 >0 回复的commentId',
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
