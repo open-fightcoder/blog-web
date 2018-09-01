@@ -13,7 +13,7 @@ type Article struct {
 	Status int64 `form:"status" json:"status"`
 	Type int64 `form:"type" json:"type"`
 	Look int64 `form:"look" json:"look"`
-	favour int64 `from:"favour" json:"favour"`
+	Favour int64 `from:"favour" json:"favour"`
 }
 
 func ArticleCreate(article *Article) (int64, error) {

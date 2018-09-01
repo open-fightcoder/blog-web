@@ -71,7 +71,7 @@ CREATE TABLE `article_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id',
   `user_id` bigint(20) NOT NULL COMMENT 'userId',
   `index` int(11) NOT NULL COMMENT '排序编号',
-  `articleType_info` varchar(500) NOT NULL DEFAULT '' COMMENT '个人分类',
+  `article_type_info` varchar(500) NOT NULL DEFAULT '' COMMENT '个人分类',
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
