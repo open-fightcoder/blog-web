@@ -52,7 +52,7 @@ CREATE TABLE `article` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '-1 删除 0 草稿 1 正常 2 置顶',
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `type` int(11) NOT NULL DEFAULT '0' COMMENT '文章类型 articleTypeId',
+  `article_type` int(11) NOT NULL DEFAULT '0' COMMENT '文章类型 articleTypeId',
   `look` int(11) NOT NULL DEFAULT '0' COMMENT '浏览量',
   `favour` int(11) NOT NULL DEFAULT '0' COMMENT '喜欢',
   PRIMARY KEY (`id`),

@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	cfgFile := flag.String("c", "/Users/leeezm/code/go/src/github.com/blog-web/cfg/cfg.toml.debug", "set config file")
+	cfgFile := flag.String("c", "/Users/tym/goproject/src/github.com/blog-web/cfg/cfg.toml.debug", "set config file")
 	flag.Parse()
 
 	common.Init(*cfgFile)

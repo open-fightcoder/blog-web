@@ -1,7 +1,6 @@
 package models
 
 import (
-	"github.com/pkg/errors"
 	. "github.com/blog-web/common/store"
 )
 
@@ -30,8 +29,11 @@ func ArticleTypeGetById(id int64) (*ArticleType, error) {
 	articleType := new(ArticleType)
 	has, err := OrmWeb.Id(id).Get(articleType)
 
-	if err != nil || !has {
-		return nil, errors.New("DB Error")
+	if err != nil {
+		return nil, err
+	}
+	if !has{
+		return nil,nil
 	}
 	return articleType, nil
 }

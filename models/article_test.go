@@ -4,7 +4,7 @@ import "testing"
 
 func TestArticleCreate(t *testing.T) {
 	InitAllInTest()
-	article := &Article{Title:"123456",Content:"qwew",Status:1,Type:1,Look:1,Favour:1,UserId:12}
+	article := &Article{Title:"123456",Content:"qwew",Status:1,ArticleType:1,Look:1,Favour:1,UserId:12}
 	if _, err := ArticleCreate(article); err != nil {
 		t.Error("Create() failed.Error:", err)
 	}
@@ -20,7 +20,7 @@ func TestArticleRemove(t *testing.T) {
 func TestArticleUpdate(t *testing.T) {
 	InitAllInTest()
 
-	article := &Article{Id:2,Title:"654321",Content:"qwew",Status:1,Type:1,Look:1,Favour:1,UserId:12}
+	article := &Article{Id:2,Title:"654321",Content:"qwew",Status:1,ArticleType:1,Look:1,Favour:1,UserId:12}
 	if err := ArticleUpdate(article); err != nil {
 		t.Error("Update() failed.Error:", err)
 	}
