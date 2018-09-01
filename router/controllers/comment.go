@@ -11,8 +11,8 @@ import (
 )
 
 func RegisterComment(router *gin.RouterGroup) {
-	router.GET("comment/add", httpHandlerCommentAdd)
-	router.GET("comment/reply", httpHandlerCommentReply)
+	router.POST("comment/add", httpHandlerCommentAdd)
+	router.POST("comment/reply", httpHandlerCommentReply)
 	router.GET("comment/delete", httpHandlerCommentDelete)
 	router.GET("comment/list", httpHandlerCommentList)
 }
@@ -56,11 +56,7 @@ func httpHandlerCommentDelete(c *gin.Context) {
 }
 
 func httpHandlerCommentList(c *gin.Context) {
-	commentId := c.Query("comment_id")
-	userId := base.UserId(c)
-	if userId == 0 {
-		panic(error.PrivError("您尚未登录!"))
-	}
+	commentId := c.Query("blog_id")
 	commentData := managers.CommentList(commentId)
 	c.JSON(http.StatusOK, commentData)
 }

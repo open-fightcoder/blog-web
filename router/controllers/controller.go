@@ -6,4 +6,5 @@ func Register(router *gin.RouterGroup) {
 	RegisterSelf(router)
 	RegisterUser(router)
 	RegisterArticle(router)
+	RegisterComment(router)
 }
