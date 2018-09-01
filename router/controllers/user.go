@@ -19,10 +19,10 @@ func RegisterUser(router *gin.RouterGroup) {
 	router.POST("user/changemess", httpHandlerChangeMess)
 
 	//TODO 测试
-	router.POST("user/follow", httpHandlerFollow)
-	router.POST("user/unfollow", httpHandlerUnfollow)
-	router.POST("user/listidol", httpHandlerListidol)
-	router.POST("user/listfans", httpHandlerListfans)
+	router.GET("user/follow", httpHandlerFollow)
+	router.GET("user/unfollow", httpHandlerUnfollow)
+	router.GET("user/listidol", httpHandlerListidol)
+	router.GET("user/listfans", httpHandlerListfans)
 }
 
 func httpHandlerListidol(c *gin.Context) {
