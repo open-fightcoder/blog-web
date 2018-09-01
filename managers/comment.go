@@ -8,11 +8,7 @@ import (
 	"github.com/blog-web/models"
 )
 
-func CommentAdd(userId int64, blogIdStr string, content string) {
-	blogId, err := strconv.ParseInt(blogIdStr, 10, 64)
-	if err != nil {
-		panic(error.ParamError("参数必须为数字!"))
-	}
+func CommentAdd(userId int64, blogId int64, content string) {
 	//TODO 添加 ArticleGetById 函数
 	//blog, err := models.ArticleGetById(blogId)
 	//if err != nil {
@@ -22,21 +18,13 @@ func CommentAdd(userId int64, blogIdStr string, content string) {
 	//	panic(error.ParamError("评论的文章不存在"))
 	//}
 	comment := &models.Comment{ArticleId: blogId, Content: content, UserId: userId, ReplyId: 0}
-	_, err = OrmWeb.Insert(comment)
+	_, err := OrmWeb.Insert(comment)
 	if err != nil {
 		panic(error.DBError("评论失败!"))
 	}
 }
 
-func CommentReply(userId int64, commentIdStr string, blogIdStr string, content string) {
-	commentId, err := strconv.ParseInt(commentIdStr, 10, 64)
-	if err != nil {
-		panic(error.ParamError("参数必须为数字!"))
-	}
-	blogId, err := strconv.ParseInt(blogIdStr, 10, 64)
-	if err != nil {
-		panic(error.ParamError("参数必须为数字!"))
-	}
+func CommentReply(userId int64, commentId int64, blogId int64, content string) {
 	//TODO 添加 ArticleGetById 函数
 	//blog, err := models.ArticleGetById(blogId)
 	//if err != nil {

@@ -5,7 +5,7 @@ import (
 )
 
 type Comment struct {
-	Id        int64
+	Id        int64  `form:"id" json:"id"`                 //Id
 	ArticleId int64  `form:"user_id" json:"user_id"`       //blogId
 	Content   string `form:"article_id" json:"article_id"` //评论内容
 	UserId    int64  `form:"user_id" json:"user_id"`       //评论人账户ID
